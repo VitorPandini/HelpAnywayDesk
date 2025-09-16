@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: 'user-service-api'
+
+  data:
+    mongodb:
+      uri: 'mongodb+srv://helpdeskuser:helpdeskuser1@clusterhelpdesk.baf2lot.mongodb.net/helpdeskdb?retryWrites=true&w=majority&appName=ClusterHelpDesk'
+      auto-index-creation: true
+
+springdoc:
+  openapi:
+    title: 'User Service API'
+    description: 'Component responsible for user managment'
+    version: '1.0.0'

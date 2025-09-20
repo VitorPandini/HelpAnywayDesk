@@ -2,6 +2,7 @@ package br.com.vitorpandini.authserviceapi.controllers.exceptions;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import models.exceptions.RefreshTokenExpired;
 import models.exceptions.ResourceNotFoundException;
 import models.exceptions.StandardError;
 import models.exceptions.ValidationException;
@@ -23,8 +24,8 @@ import static java.time.LocalDateTime.now;
 @RestControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(BadCredentialsException.class)
-    ResponseEntity<StandardError> handlerResourceNotFoundException(final BadCredentialsException ex, final HttpServletRequest request) {
+    @ExceptionHandler({BadCredentialsException.class, RefreshTokenExpired.class})
+    ResponseEntity<StandardError> handlerResourceNotFoundException(final RuntimeException ex, final HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
                 StandardError.builder()
                         .timestamp(now())
@@ -35,6 +36,9 @@ public class ControllerExceptionHandler {
                         .build()
         );
     }
+
+
+
 
 
 

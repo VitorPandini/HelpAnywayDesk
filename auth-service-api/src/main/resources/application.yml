@@ -9,3 +9,4 @@ spring:
 jwt:
   secret: 'bEthXkn8aPGTJw4G2kMBTWrod0Mf6jGUtqQeJt+Q2o5y+7oxxtjtkBo9HdF7bTv5oafT53004PJWLsn/bcFboINLlBSxw8akye7NIkyGWBo='
   expiration: 2
+  expiration-refresh-token: 2

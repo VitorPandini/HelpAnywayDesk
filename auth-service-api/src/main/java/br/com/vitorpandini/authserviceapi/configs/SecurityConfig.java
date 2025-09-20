@@ -22,7 +22,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests(https-> https.requestMatchers(
-                        new AntPathRequestMatcher("/api/v1/auth/signin"),
+                        new AntPathRequestMatcher("/api/v1/auth/**"),
                         new AntPathRequestMatcher("/swagger-ui/**"),
                         new AntPathRequestMatcher("/v3/api-docs/**")
                         ).permitAll().anyRequest().authenticated())

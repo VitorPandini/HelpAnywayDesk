@@ -1,12 +1,7 @@
 spring:
   application:
-   name: auth-service-api
+    name: 'auth-service-api'
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URI:http://localhost:8888}
 
-  data:
-    mongodb:
-      uri: 'mongodb+srv://helpdeskuser:helpdeskuser1@clusterhelpdesk.baf2lot.mongodb.net/helpdeskdb?retryWrites=true&w=majority&appName=ClusterHelpDesk'
-
-jwt:
-  secret: 'bEthXkn8aPGTJw4G2kMBTWrod0Mf6jGUtqQeJt+Q2o5y+7oxxtjtkBo9HdF7bTv5oafT53004PJWLsn/bcFboINLlBSxw8akye7NIkyGWBo='
-  expiration: 2
-  expiration-refresh-token: 2

@@ -33,8 +33,6 @@ dependencies {
     // Biblioteca de código comum
     implementation 'br.com.vitorpandini:hd-commons-libsTo:1.0.0'
 
-    // Starter para integração com banco de dados
-    compileOnly 'com.h2database:h2'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'

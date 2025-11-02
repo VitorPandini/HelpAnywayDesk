@@ -28,7 +28,7 @@ public record CreateOrderRequest(
 
         @Schema(description = "Status of order",example = "Open,In progress, Closed or Canceled")
         @NotBlank(message = "The status cannot be null or blank ")
-        @Size(min = 5,max = 15,message = "The status must be between 5 and 15 characters")
+        @Size(min = 3,max = 15,message = "The status must be between 5 and 15 characters")
         String status
 
 ) {

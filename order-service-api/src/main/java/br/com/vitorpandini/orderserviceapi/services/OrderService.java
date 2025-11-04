@@ -10,5 +10,7 @@ public interface OrderService {
 
     OrderResponse update(final Long idOrder, UpdateOrderRequest request);
 
-    Order findById(Long idOrder);
+    Order findEntityById(Long idOrder);
+
+    OrderResponse findById(Long idOrder);
 }

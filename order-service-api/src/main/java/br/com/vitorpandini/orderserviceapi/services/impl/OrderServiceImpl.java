@@ -32,10 +32,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponse update(final Long idOrder, UpdateOrderRequest request) {
-        Order entitySearch= findById(idOrder);
-        var entityUpdated = mapper.fromRequest(entitySearch,request);
+        Order entitySearch = findEntityById(idOrder);
+        var entityUpdated = mapper.fromRequest(entitySearch, request);
 
-        if (entityUpdated.getStatus().equals(OrderStatusEnum.CLOSED)){
+        if (entityUpdated.getStatus().equals(OrderStatusEnum.CLOSED)) {
             entityUpdated.setClosedAt(LocalDateTime.now());
         }
 
@@ -44,7 +44,14 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public Order findById(Long idOrder) {
+    public Order findEntityById(Long idOrder) {
         return repository.findById(idOrder).orElseThrow(() -> new ResourceNotFoundException("Object not found" + idOrder + "Type: " + Order.class.getSimpleName()));
     }
+
+    @Override
+    public OrderResponse findById(Long idOrder) {
+        return mapper.fromEntity(findEntityById(idOrder));
+    }
 }
+
+

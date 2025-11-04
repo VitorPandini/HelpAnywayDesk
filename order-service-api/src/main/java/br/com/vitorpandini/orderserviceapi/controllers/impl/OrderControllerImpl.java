@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import models.requests.CreateOrderRequest;
 import models.requests.UpdateOrderRequest;
 import models.responses.OrderResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -44,5 +46,10 @@ public class OrderControllerImpl implements OrderController {
     @Override
     public ResponseEntity<List<OrderResponse>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
+    }
+
+    @Override
+    public ResponseEntity<Page<OrderResponse>> findAll(Pageable pageable) {
+      return ResponseEntity.ok(service.findAll(pageable));
     }
 }

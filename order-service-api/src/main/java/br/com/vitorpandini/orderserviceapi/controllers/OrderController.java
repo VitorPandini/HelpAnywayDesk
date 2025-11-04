@@ -15,6 +15,9 @@ import models.requests.CreateOrderRequest;
 import models.requests.UpdateOrderRequest;
 import models.responses.AuthenticateResponse;
 import models.responses.OrderResponse;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -173,5 +176,20 @@ public interface OrderController {
 
 
 
+    @Operation(summary = "Find all Orders by Pageable")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Orders found"),
+
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = StandardError.class))
+            ),
+
+
+    }
+    )
+    @GetMapping("/page")
+    ResponseEntity<Page<OrderResponse>> findAll(@ParameterObject Pageable pageable);
 
 }

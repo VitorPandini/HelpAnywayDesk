@@ -19,6 +19,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/orders")
 @Tag(name= "OrderController", description = "Controller responsible for orders operations")
@@ -115,6 +117,59 @@ public interface OrderController {
             @NotNull(message = "The order id must be informed")
             @Parameter(description = "Order id", required = true,example = "10")
             @PathVariable("id") Long idOrder);
+
+
+
+
+    @Operation(summary = "Delete order by id ")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "No content"),
+
+            @ApiResponse(responseCode = "400", description = "Bad Request",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = StandardError.class))
+            ),
+            @ApiResponse(responseCode = "404", description = "Not Found",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = StandardError.class))
+            ),
+
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = StandardError.class))
+            ),
+
+
+    }
+    )
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deleteById(
+            @NotNull(message = "The order id must be informed")
+            @Parameter(description = "Order id", required = true,example = "10")
+            @PathVariable("id") Long idOrder);
+
+
+
+
+
+    @Operation(summary = "Find all Orders")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Orders found"),
+
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = StandardError.class))
+            ),
+
+
+    }
+    )
+    @GetMapping("")
+    ResponseEntity<List<OrderResponse>> findAll();
 
 
 

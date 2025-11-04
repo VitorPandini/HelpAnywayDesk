@@ -10,6 +10,8 @@ import models.responses.OrderResponse;
 import org.mapstruct.*;
 
 
+import java.util.List;
+
 import static org.mapstruct.NullValueCheckStrategy.ALWAYS;
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
@@ -23,6 +25,9 @@ public interface OrderMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status",source = "status",qualifiedByName = "mapStatus")
     Order fromRequest(CreateOrderRequest createOrder);
+
+
+    List<OrderResponse> fromEntities(List<Order> orders);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)

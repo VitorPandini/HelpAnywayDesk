@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class OrderControllerImpl implements OrderController {
@@ -31,5 +33,16 @@ public class OrderControllerImpl implements OrderController {
     @Override
     public ResponseEntity<OrderResponse> findById(Long idOrder) {
         return ResponseEntity.ok(service.findById(idOrder));
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteById(final Long idOrder) {
+        service.delete(idOrder);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<List<OrderResponse>> findAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
 }

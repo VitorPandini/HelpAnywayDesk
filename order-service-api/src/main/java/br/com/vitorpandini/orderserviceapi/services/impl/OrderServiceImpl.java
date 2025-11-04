@@ -14,6 +14,7 @@ import models.responses.OrderResponse;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -51,6 +52,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderResponse findById(Long idOrder) {
         return mapper.fromEntity(findEntityById(idOrder));
+    }
+
+    @Override
+    public void delete(final Long idOrder) {
+        repository.delete(findEntityById(idOrder));
+    }
+
+    @Override
+    public List<OrderResponse> findAll() {
+        return mapper.fromEntities(repository.findAll());
     }
 }
 

@@ -33,6 +33,10 @@ dependencies {
     // Biblioteca de código comum
     implementation 'br.com.vitorpandini:hd-commons-libsTo:1.0.0'
 
+    implementation('org.springframework.cloud:spring-cloud-starter-openfeingn'){
+        because('Implementation for openfeign')
+    }
+
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'

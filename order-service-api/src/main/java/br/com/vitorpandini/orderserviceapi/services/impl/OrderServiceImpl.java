@@ -1,5 +1,6 @@
 package br.com.vitorpandini.orderserviceapi.services.impl;
 
+import br.com.vitorpandini.orderserviceapi.clients.UserServiceFeignClient;
 import br.com.vitorpandini.orderserviceapi.entities.Order;
 import br.com.vitorpandini.orderserviceapi.repositories.OrderRepository;
 import br.com.vitorpandini.orderserviceapi.services.OrderService;
@@ -11,6 +12,7 @@ import models.exceptions.ResourceNotFoundException;
 import models.requests.CreateOrderRequest;
 import models.requests.UpdateOrderRequest;
 import models.responses.OrderResponse;
+import models.responses.UserResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,8 +29,12 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderMapper mapper;
 
+    private final UserServiceFeignClient userServiceFeignClient;
+
     @Override
     public void save(CreateOrderRequest request) {
+        final var requester = validateUserId(request.requesterId());
+        final var customer = validateUserId(request.customerId());
         repository.save(mapper.fromRequest(request));
         log.info("Order saved");
     }
@@ -69,6 +75,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Page<OrderResponse> findAll(Pageable pageable) {
         return repository.findAll(pageable).map(mapper::fromEntity);
+    }
+
+    public UserResponse validateUserId(final String userId) {
+    return userServiceFeignClient.findById(userId).getBody();
     }
 }
 

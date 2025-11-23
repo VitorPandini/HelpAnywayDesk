@@ -41,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponse update(final Long idOrder, UpdateOrderRequest request) {
+        validateUsers(request);
         Order entitySearch = findEntityById(idOrder);
         var entityUpdated = mapper.fromRequest(entitySearch, request);
 
@@ -49,6 +50,11 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return mapper.fromEntity(repository.save(entityUpdated));
+    }
+
+    private void validateUsers(UpdateOrderRequest request) {
+        if(request.requesterId() != null) validateUserId(request.requesterId());
+        if(request.customerId() != null) validateUserId(request.customerId());
     }
 
 
